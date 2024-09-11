@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import Map from './components/Map'
+import Header from './components/Header'
+import { ThreeCircles } from 'react-loader-spinner'
+
 
 function App() {
   const [eventData, setEventData] = useState([])
@@ -17,8 +20,24 @@ function App() {
   }, [])
 
   return (
-    <div>
-        { !loading ? <Map eventData={eventData} /> : <div className="loader">Carregando...</div> }
+    <div className="big-container">
+      <Header /> 
+        { !loading ?
+        <div className="container">
+          <Map eventData={eventData} />
+        </div>
+        : <div className="loader">
+          <ThreeCircles
+            height="80"
+            width="80"
+            radius="9"
+            color="firebrick"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            />
+          </div>
+        }
     </div>
   );
 }
